@@ -1,4 +1,0 @@
-python-markdown-math==0.8
-mkdocstrings==0.16.2
-mkdocs-jupyter==0.17.3
-mkdocs-macros-plugin==0.6.0
