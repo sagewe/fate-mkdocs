@@ -7,23 +7,13 @@ ENV PYTHONDONTWRITEBYTECODE=1
 # Set build directory
 WORKDIR /tmp
 
+COPY requirements.txt .
+
 RUN set -e ;\
     apk upgrade --update-cache -a ;\
     apk add --no-cache libstdc++ libffi-dev ;\
     apk add --no-cache --virtual .build gcc g++ musl-dev python3-dev cargo openssl-dev git;\
-    pip install --no-cache-dir \
-        mkdocs-material==7.3.0 \
-        mkdocs-jupyter==0.18.0 \
-        python-markdown-math==0.8 \
-        mkdocs-macros-plugin==0.6.0 \
-        git+git://github.com/weiwee/mkdocs-static-i18n@main#egg=mkdocs-static-i18n \
-        git+git://github.com/mkdocstrings/mkdocstrings@f6cf570#egg=mkdocstrings\
-        pytkdocs[numpy-style]==0.14.0 \
-        mkdocs-simple-hooks \
-        mkdocs-awesome-pages-plugin
-
-# FATE
-RUN pip install --no-cache-dir apsw peewee cachetools ruamel.yaml beautifultable
+    pip install --no-cache-dir -r requirements.txt
 
 # clean 
 RUN apk del .build ;\
